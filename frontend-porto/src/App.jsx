@@ -14,7 +14,6 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Skills />
     </>
   )
 }
@@ -30,7 +29,7 @@ function App() {
             <Sidebar />
 
         {/* Main content wrapper: add left margin for desktop sidebar and bottom padding for mobile bottom nav */}
-        <main className="grow md:ml-[260px] pb-20 md:pb-0 min-h-screen flex flex-col">
+        <main className="grow md:ml-[280px] pb-20 md:pb-0 min-h-screen flex flex-col">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/experience" element={<Experience />} />
