@@ -19,7 +19,20 @@ export const translations = {
     hero_desc1: "Seorang Backend Developer dan Mahasiswa Teknik Informatika di Universitas Sebelas Maret (UNS) yang berdedikasi untuk membangun solusi digital yang berdampak. Saya spesialis dalam pengembangan sistem backend dan platform web menggunakan tech stack modern.",
     hero_desc2: "Fokus saya adalah merancang arsitektur database, RESTful API (Node.js, Laravel), serta sistem real-time (Socket.io) yang terstruktur dengan baik dan mudah dipelihara. Fleksibel juga di sisi Frontend (React, Vue, Tailwind) untuk membangun aplikasi modern yang scalable.",
     hero_button_chat: ">_ NGOBROL BARENG",
+    hero_cta_cv: "Unduh CV (PDF)",
+    hero_cta_projects: "Lihat Proyek",
+    hero_cta_contact: "Hubungi Saya",
+    hero_skills_title: "Keahlian Technical",
+    hero_skills_subtitle: "Keahlian profesional & teknologi yang saya kuasai.",
+    hero_featured_title: "Proyek Unggulan",
+    hero_featured_subtitle: "Beberapa proyek terbaik yang telah saya kembangkan.",
     
+    // Status & Utility
+    status_available: "Terbuka untuk Kerja (Available)",
+    copy_email: "Salin Email",
+    email_copied: "Email berhasil disalin ke clipboard!",
+    download_cv: "Unduh CV PDF",
+
     // Skills (Pencapaian)
     ach_title: "Pencapaian",
     ach_desc: "Koleksi sertifikat dan lencana yang telah saya raih sepanjang perjalanan profesional dan akademik saya.",
@@ -69,7 +82,20 @@ export const translations = {
     hero_desc1: "A Backend Developer and Informatics Engineering Student at Sebelas Maret University (UNS) dedicated to building impactful digital solutions. I specialize in developing backend systems and web platforms using modern tech stacks.",
     hero_desc2: "My focus is designing well-structured and maintainable database architectures, RESTful APIs (Node.js, Laravel), and real-time systems (Socket.io). I'm also flexible on the Frontend (React, Vue, Tailwind) to build scalable modern applications.",
     hero_button_chat: ">_ LET'S CHAT",
+    hero_cta_cv: "Download CV (PDF)",
+    hero_cta_projects: "View Projects",
+    hero_cta_contact: "Contact Me",
+    hero_skills_title: "Technical Skills",
+    hero_skills_subtitle: "My professional skills & technologies I master.",
+    hero_featured_title: "Featured Projects",
+    hero_featured_subtitle: "Selected top projects I have delivered.",
     
+    // Status & Utility
+    status_available: "Available for Hire",
+    copy_email: "Copy Email",
+    email_copied: "Email copied to clipboard!",
+    download_cv: "Download CV PDF",
+
     // Skills (Pencapaian)
     ach_title: "Achievements",
     ach_desc: "A collection of certificates and badges I have earned throughout my professional and academic journey.",

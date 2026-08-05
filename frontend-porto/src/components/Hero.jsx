@@ -1,10 +1,48 @@
 import { motion } from 'framer-motion';
+import { FileDown, Folder, Mail, ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+
+// Import Screenshots for Featured Projects Preview
+import imgWebAdminCTrack from '../assets/web admin ctrack.jpeg';
+import imgSewaAlatBand from '../assets/sewa alat band.jpeg';
+import imgShintaBakery from '../assets/shinta bakery.jpeg';
 
 export default function Hero() {
   const { lang, t } = useLanguage();
 
-  // 3D Sphere Tech Stack Items (Enlarged icons & labels matching friend's layout)
+  // Featured Projects Preview Data
+  const featuredProjects = [
+    {
+      id: "c-track",
+      title: "C-Track (Clean Tracking System)",
+      category: "Full Stack Internship",
+      period: "Feb 2026 - Jul 2026",
+      desc: lang === 'en' ? "Real-time employee monitoring app & Socket.io chat forum built for PT. Sarana Insan Muda Selaras." : "Aplikasi real-time employee monitoring & forum chat WebSocket untuk PT. Sarana Insan Muda Selaras.",
+      image: imgWebAdminCTrack,
+      tech: ["TypeScript", "Node.js", "Prisma ORM", "Socket.io", "React Native"]
+    },
+    {
+      id: "sewa-alat-band",
+      title: "Sewa Alat Band - Rental System",
+      category: "Web Application",
+      period: "Sep 2025 - Dec 2025",
+      desc: lang === 'en' ? "Equipment rental system integrated with Midtrans Sandbox API payment gateway." : "Sistem informasi persewaan alat musik terintegrasi Midtrans API Sandbox payment gateway.",
+      image: imgSewaAlatBand,
+      tech: ["Laravel", "PHP", "MySQL", "Midtrans API", "Vue.js"]
+    },
+    {
+      id: "shinta-bakery",
+      title: "Shinta Bakery - E-Commerce",
+      category: "Backend & Full Stack",
+      period: "Sep 2025 - Dec 2025",
+      desc: lang === 'en' ? "E-commerce & catering platform with 12+ interconnected tables based on custom ERD." : "Platform e-commerce & katering dengan database relasional 12+ tabel terhubung.",
+      image: imgShintaBakery,
+      tech: ["Laravel", "Vue.js", "Inertia.js", "MySQL"]
+    }
+  ];
+
+  // 3D Sphere Tech Stack Items
   const techStack = [
     {
       name: 'HTML5',
@@ -165,12 +203,12 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Main Title - Prominent Large Font matching friend screenshot */}
+        {/* Main Title */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 sm:mb-6 tracking-tight transition-colors">
           {t('hero_greeting')}
         </h1>
         
-        {/* Sub-info metadata row - Larger text */}
+        {/* Sub-info metadata row */}
         <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-7 sm:mb-9 transition-colors font-sans">
           <div className="flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500"></span>
@@ -182,8 +220,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Bio Description Paragraphs - Larger font (text-base sm:text-lg) */}
-        <div className="space-y-5 text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed max-w-4xl mb-10 sm:mb-12 transition-colors font-sans">
+        {/* Bio Description Paragraphs */}
+        <div className="space-y-5 text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed max-w-4xl mb-8 sm:mb-10 transition-colors font-sans">
           <p>
             {t('hero_desc1')}
           </p>
@@ -192,21 +230,54 @@ export default function Hero() {
           </p>
         </div>
 
+        {/* CTA Buttons Group */}
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-10 sm:mb-12">
+          {/* Download CV Button */}
+          <a
+            href="/Hamka_Ibnu_Zufar_CV.pdf"
+            download="Hamka_Ibnu_Zufar_CV.pdf"
+            className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all"
+          >
+            <FileDown className="w-4 h-4 stroke-[2.2]" />
+            <span>{t('hero_cta_cv')}</span>
+          </a>
+
+          {/* View Projects Button */}
+          <Link
+            to="/projects"
+            className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gray-100 dark:bg-[#1a1a1a] hover:bg-gray-200 dark:hover:bg-[#252525] text-gray-900 dark:text-white border border-gray-300 dark:border-gray-800 font-semibold text-sm hover:-translate-y-0.5 transition-all"
+          >
+            <Folder className="w-4 h-4 text-emerald-500" />
+            <span>{t('hero_cta_projects')}</span>
+          </Link>
+
+          {/* Contact Button */}
+          <a
+            href="https://wa.me/6285702480395"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gray-100 dark:bg-[#1a1a1a] hover:bg-gray-200 dark:hover:bg-[#252525] text-gray-900 dark:text-white border border-gray-300 dark:border-gray-800 font-semibold text-sm hover:-translate-y-0.5 transition-all"
+          >
+            <Mail className="w-4 h-4 text-emerald-500" />
+            <span>{t('hero_cta_contact')}</span>
+          </a>
+        </div>
+
         {/* Divider Line */}
         <hr className="border-gray-200 dark:border-gray-800/80 my-10 sm:my-12 transition-colors" />
 
-        {/* Section: Keahlian (Tech Stack Grid with Larger 3D Badges and Names) */}
-        <div>
+        {/* Section: Technical Skills */}
+        <div className="mb-14">
           <div className="mb-7">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2.5 mb-1.5">
-              <span className="text-emerald-500 font-mono text-lg sm:text-xl">&lt;/&gt;</span> Keahlian
+              <span className="text-emerald-500 font-mono text-lg sm:text-xl">&lt;/&gt;</span> {t('hero_skills_title')}
             </h3>
             <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base font-sans">
-              Keahlian profesional saya.
+              {t('hero_skills_subtitle')}
             </p>
           </div>
 
-          {/* 3D Sphere Badges Grid (Enlarged sphere badges & clear label typography) */}
+          {/* 3D Sphere Badges Grid */}
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-9 gap-y-7 gap-x-4 items-start">
             {techStack.map((tech, idx) => (
               <motion.div
@@ -215,23 +286,85 @@ export default function Hero() {
                 transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                 className="flex flex-col items-center group cursor-pointer"
               >
-                {/* 3D Sphere Badge Container with Top Specular Glow */}
+                {/* 3D Sphere Badge Container */}
                 <div className={`w-[54px] h-[54px] sm:w-[60px] sm:h-[60px] rounded-full bg-gradient-to-tr ${tech.gradient} p-0.5 shadow-xl shadow-black/35 relative flex items-center justify-center overflow-hidden border-2 border-white/30 transition-all group-hover:shadow-emerald-500/30 shrink-0`}>
-                  {/* Gloss Specular Highlight Layer */}
                   <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-white/10 to-transparent pointer-events-none rounded-full" />
                   <div className="absolute top-1 left-3 w-6 h-2.5 bg-white/45 rounded-full blur-[1px] pointer-events-none" />
                   
-                  {/* Icon */}
                   <div className="z-10 flex items-center justify-center">
                     {tech.icon}
                   </div>
                 </div>
 
-                {/* Always Visible Detail Language Name Below Icon */}
                 <span className="text-xs sm:text-[13px] font-bold text-gray-700 dark:text-gray-300 mt-2.5 text-center group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
                   {tech.name}
                 </span>
               </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section: Featured Projects Preview */}
+        <div className="pt-6 border-t border-gray-200 dark:border-gray-800/80">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2.5 mb-1.5">
+                <Sparkles className="w-6 h-6 text-emerald-500" /> {t('hero_featured_title')}
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base font-sans">
+                {t('hero_featured_subtitle')}
+              </p>
+            </div>
+            <Link
+              to="/projects"
+              className="text-xs sm:text-sm font-mono font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 flex items-center gap-1 transition-colors shrink-0"
+            >
+              {t('view_more')} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredProjects.map((proj) => (
+              <Link
+                key={proj.id}
+                to="/projects"
+                className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800/80 rounded-2xl overflow-hidden shadow-sm hover:border-emerald-500/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+              >
+                <div className="w-full h-44 bg-gray-100 dark:bg-[#0a0a0a] overflow-hidden relative border-b border-gray-200 dark:border-gray-800/80">
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-mono text-white font-semibold">
+                    {proj.category}
+                  </div>
+                </div>
+                <div className="p-5 flex flex-col justify-between flex-grow">
+                  <div>
+                    <h4 className="font-bold text-base text-gray-900 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors mb-1.5 line-clamp-1">
+                      {proj.title}
+                    </h4>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed mb-4 font-sans">
+                      {proj.desc}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {proj.tech.slice(0, 3).map((t, idx) => (
+                      <span key={idx} className="px-2 py-0.5 bg-gray-100 dark:bg-[#1a1a1a] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 text-[10px] font-mono rounded">
+                        {t}
+                      </span>
+                    ))}
+                    {proj.tech.length > 3 && (
+                      <span className="px-2 py-0.5 text-gray-500 text-[10px] font-mono">
+                        +{proj.tech.length - 3}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

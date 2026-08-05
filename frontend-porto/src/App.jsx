@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
-import { LanguageProvider } from './context/LanguageContext'
+import { LanguageProvider, useLanguage } from './context/LanguageContext'
 import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
 import Experience from './components/Experience'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -18,17 +18,33 @@ const Home = () => {
   )
 }
 
-function App() {
-  return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Router>
-          <div className="bg-noise dark:opacity-100 opacity-30"></div>
-          {/* Update layout: flex-col on mobile, flex-row on desktop */}
-          <div className="bg-gray-50 dark:bg-[#0a0a0a] min-h-screen text-gray-900 dark:text-white selection:bg-emerald-500 selection:text-white font-sans flex flex-col md:flex-row overflow-x-hidden transition-colors duration-300">
-            <Sidebar />
+// Component to dynamically update page titles
+const PageTitleUpdater = () => {
+  const location = useLocation();
+  const { lang } = useLanguage();
 
-        {/* Main content wrapper: add left margin for desktop sidebar and bottom padding for mobile bottom nav */}
+  useEffect(() => {
+    const titles = {
+      '/': lang === 'en' ? 'Hamka Ibnu Zufar | Full Stack & Backend Developer' : 'Hamka Ibnu Zufar | Full Stack & Backend Developer',
+      '/experience': lang === 'en' ? 'Experience | Hamka Ibnu Zufar' : 'Pengalaman | Hamka Ibnu Zufar',
+      '/skills': lang === 'en' ? 'Achievements | Hamka Ibnu Zufar' : 'Pencapaian | Hamka Ibnu Zufar',
+      '/projects': lang === 'en' ? 'Projects | Hamka Ibnu Zufar' : 'Proyek | Hamka Ibnu Zufar',
+      '/dashboard': lang === 'en' ? 'Dashboard | Hamka Ibnu Zufar' : 'Dasbor | Hamka Ibnu Zufar',
+    };
+
+    document.title = titles[location.pathname] || 'Hamka Ibnu Zufar';
+  }, [location.pathname, lang]);
+
+  return null;
+};
+
+function AppContent() {
+  return (
+    <Router>
+      <PageTitleUpdater />
+      <div className="bg-noise dark:opacity-100 opacity-30"></div>
+      <div className="bg-gray-50 dark:bg-[#0a0a0a] min-h-screen text-gray-900 dark:text-white selection:bg-emerald-500 selection:text-white font-sans flex flex-col md:flex-row overflow-x-hidden transition-colors duration-300">
+        <Sidebar />
         <main className="grow md:ml-[280px] pb-20 md:pb-0 min-h-screen flex flex-col">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -40,7 +56,15 @@ function App() {
           <Footer />
         </main>
       </div>
-        </Router>
+    </Router>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
       </LanguageProvider>
     </ThemeProvider>
   )

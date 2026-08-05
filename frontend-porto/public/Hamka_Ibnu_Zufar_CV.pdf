@@ -1,0 +1,97 @@
+%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+      /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+      /F3 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+    >>
+  >>
+  /MediaBox [0 0 595 842]
+  /Contents 4 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Length 3503
+>>
+stream
+BT /F1 18 Tf 50 780 Td (HAMKA IBNU ZUFAR) Tj ET
+BT /F3 9.5 Tf 50 758 Td (Surakarta, Indonesia | +6285702480395 | hamkaibnuzufar123@gmail.com) Tj ET
+BT /F3 9.5 Tf 50 745 Td (github.com/hamzz02 | linkedin.com/in/hamka-ibnu-zufar) Tj ET
+BT /F3 9.5 Tf 50 732 Td () Tj ET
+BT /F2 12 Tf 50 711 Td (SUMMARY) Tj ET
+0.2 0.7 0.5 rg 50 708 500 1 re f 0 g
+BT /F3 9.5 Tf 50 693 Td (Informatics Engineering student at Universitas Sebelas Maret \(UNS\) with a strong passion for Web Development, specializing in Backend engineering. Experienced in building RESTful APIs, managing database architectures, and developing full-stack applications. Proficient in Node.js, Laravel, and modern frontend frameworks like React Native and Vue.js.) Tj ET
+BT /F3 9.5 Tf 50 680 Td () Tj ET
+BT /F2 12 Tf 50 659 Td (EDUCATION) Tj ET
+0.2 0.7 0.5 rg 50 656 500 1 re f 0 g
+BT /F3 9.5 Tf 50 641 Td (Universitas Sebelas Maret \(UNS\) - Associate Degree in Informatics Engineering \(IPK: 3.65 / 4.00\) [2024 - Present]) Tj ET
+BT /F3 9.5 Tf 50 628 Td () Tj ET
+BT /F2 12 Tf 50 607 Td (EXPERIENCE) Tj ET
+0.2 0.7 0.5 rg 50 604 500 1 re f 0 g
+BT /F3 9.5 Tf 50 589 Td (Full Stack Developer Intern | PT. Sarana Insan Muda Selaras \(Life Media\) [Feb 2026 - Jul 2026]) Tj ET
+BT /F3 9.5 Tf 50 576 Td (- Architected backend system & database schema utilizing Prisma ORM for C-Track employee monitoring app.) Tj ET
+BT /F3 9.5 Tf 50 563 Td (- Built RESTful APIs using TypeScript/Node.js and real-time chat via WebSocket \(Socket.io\).) Tj ET
+BT /F3 9.5 Tf 50 550 Td (- Engineered mass Push Notification architecture via Expo Server SDK & FCM V1 API.) Tj ET
+BT /F3 9.5 Tf 50 537 Td (- Deployed backend API to Linux VPS using PM2 & resolved transport-layer issues.) Tj ET
+BT /F3 9.5 Tf 50 524 Td (- Integrated React Native frontend for zero-delay location updates of field workers.) Tj ET
+BT /F3 9.5 Tf 50 511 Td () Tj ET
+BT /F2 12 Tf 50 490 Td (PROJECT EXPERIENCES) Tj ET
+0.2 0.7 0.5 rg 50 487 500 1 re f 0 g
+BT /F3 9.5 Tf 50 472 Td (1. Sewa Alat Band - Equipment Rental System \(Laravel, MySQL, PHP\) [Sep 2025 - Dec 2025]) Tj ET
+BT /F3 9.5 Tf 50 459 Td (   - Web-based rental info system with Midtrans API Sandbox integration & automatic price calculation.) Tj ET
+BT /F3 9.5 Tf 50 446 Td (2. Shinta Bakery - E-Commerce & Catering Platform \(Vue.js, Inertia.js, Laravel\) [Sep 2025 - Dec 2025]) Tj ET
+BT /F3 9.5 Tf 50 433 Td (   - 12+ interconnected tables ERD, custom Laravel Middleware, dynamic booking slot management.) Tj ET
+BT /F3 9.5 Tf 50 420 Td (3. E-Mailkomp - Member Assessment Management \(Laravel, Vue.js, Inertia.js\) [Okt 2025 - Nov 2025]) Tj ET
+BT /F3 9.5 Tf 50 407 Td (   - Scoring calculation algorithm, responsive Vue.js UI, deployed to CWPanel hosting.) Tj ET
+BT /F3 9.5 Tf 50 394 Td () Tj ET
+BT /F2 12 Tf 50 373 Td (SKILLS) Tj ET
+0.2 0.7 0.5 rg 50 370 500 1 re f 0 g
+BT /F3 9.5 Tf 50 355 Td (- Languages: PHP, JavaScript \(ES6+\), HTML5, CSS3, TypeScript) Tj ET
+BT /F3 9.5 Tf 50 342 Td (- Frameworks: Node.js, Express.js, Laravel, React Native, React.js, Vue.js, Tailwind CSS, Bootstrap, Socket.io, Expo) Tj ET
+BT /F3 9.5 Tf 50 329 Td (- Database & Tools: MySQL, Prisma ORM, Git/GitHub, WebSockets, Swagger, FCM V1, EAS, Jira) Tj ET
+BT /F3 9.5 Tf 50 316 Td () Tj ET
+BT /F2 12 Tf 50 295 Td (CERTIFICATES) Tj ET
+0.2 0.7 0.5 rg 50 292 500 1 re f 0 g
+BT /F3 9.5 Tf 50 277 Td (- AWS Academy Graduate - Cloud Developing - Training Badge \(AWS, July 2026\)) Tj ET
+BT /F3 9.5 Tf 50 264 Td (- HTML Essentials \(Cisco, December 2025\)) Tj ET
+
+endstream
+endobj
+
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000344 00000 n 
+
+trailer
+<<
+  /Size 5
+  /Root 1 0 R
+>>
+startxref
+3913
+%%EOF

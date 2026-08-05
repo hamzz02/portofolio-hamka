@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Search, Filter, X } from 'lucide-react';
+import { Award, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 // TODO: Import foto sertifikat Anda di sini, misalnya:
@@ -58,30 +58,6 @@ export default function Skills() {
         <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-[15px] max-w-3xl leading-relaxed transition-colors">
           {t('ach_desc')}
         </p>
-      </div>
-
-      {/* Filters/Search Placeholder */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-          <input 
-            type="text" 
-            placeholder={t('ach_search')} 
-            className="w-full bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800/80 rounded-xl py-2.5 pl-10 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-gray-400 dark:focus:border-gray-600 transition-colors shadow-sm"
-          />
-        </div>
-        <div className="relative">
-          <select className="w-full bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800/80 rounded-xl py-2.5 px-4 text-sm text-gray-600 dark:text-gray-400 appearance-none focus:outline-none focus:border-gray-400 dark:focus:border-gray-600 transition-colors shadow-sm">
-            <option>{t('ach_filter_type')}</option>
-          </select>
-          <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
-        </div>
-        <div className="relative">
-          <select className="w-full bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800/80 rounded-xl py-2.5 px-4 text-sm text-gray-600 dark:text-gray-400 appearance-none focus:outline-none focus:border-gray-400 dark:focus:border-gray-600 transition-colors shadow-sm">
-            <option>{t('ach_filter_category')}</option>
-          </select>
-          <Filter className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
-        </div>
       </div>
 
       <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 transition-colors">{t('ach_total')}: {certificates.length}</p>
