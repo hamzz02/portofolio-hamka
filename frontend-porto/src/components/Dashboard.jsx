@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, BookOpen, Code2 } from 'lucide-react';
+import { ExternalLink, BookOpen } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const GithubIcon = ({ className }) => (
@@ -14,47 +14,63 @@ export default function Dashboard() {
   const { lang } = useLanguage();
   const [userData, setUserData] = useState(null);
   const [hoveredCell, setHoveredCell] = useState(null);
+  const [recentCommitsCount, setRecentCommitsCount] = useState(1);
 
   const username = 'hamzz02';
 
-  // Fetch live GitHub User Info
+  // Fetch live GitHub User Info & Public Events
   useEffect(() => {
     async function fetchGitHubData() {
       try {
-        const res = await fetch(`https://api.github.com/users/${username}`);
-        if (res.ok) {
-          const data = await res.json();
+        const userRes = await fetch(`https://api.github.com/users/${username}`);
+        if (userRes.ok) {
+          const data = await userRes.json();
           setUserData(data);
         }
+
+        // Fetch live events to count today's commits
+        const eventsRes = await fetch(`https://api.github.com/users/${username}/events`);
+        if (eventsRes.ok) {
+          const events = await eventsRes.json();
+          const todayStr = new Date().toISOString().split('T')[0];
+          
+          let todayCommits = 0;
+          events.forEach(evt => {
+            if (evt.type === 'PushEvent' && evt.created_at.startsWith(todayStr)) {
+              todayCommits += evt.payload?.commits?.length || 1;
+            }
+          });
+
+          if (todayCommits > 0) {
+            setRecentCommitsCount(todayCommits);
+          }
+        }
       } catch (err) {
-        console.error('Error fetching GitHub user data:', err);
+        console.error('Error fetching GitHub live data:', err);
       }
     }
     fetchGitHubData();
   }, [username]);
 
-  // Generate 52 weeks ending exactly in July (Aug -> Jul sequence)
-  const generateMonthAlignedGrid = () => {
+  // Generate standard 2026 GitHub Calendar (Jan -> Dec)
+  const generate2026CalendarGrid = () => {
     const monthsNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const weeks = [];
     const monthLabels = [];
 
-    // End date set to late July 2026
-    const endDate = new Date(2026, 6, 31); // Month 6 = July in JS (0-indexed)
-    const startDate = new Date(endDate);
-    startDate.setDate(startDate.getDate() - (52 * 7 - 1));
-
+    // Full year 2026 (Jan 1, 2026 -> Dec 31, 2026)
+    const startDate = new Date(2026, 0, 1); // Jan 1, 2026
     let lastMonth = -1;
 
-    for (let w = 0; w < 52; w++) {
+    for (let w = 0; w < 53; w++) {
       const daysInWeek = [];
       for (let d = 0; d < 7; d++) {
         const currentDate = new Date(startDate);
         currentDate.setDate(currentDate.getDate() + (w * 7 + d));
         const monthIndex = currentDate.getMonth();
 
-        // Register month label at the exact column index when a new month starts
-        if (d === 0 && monthIndex !== lastMonth) {
+        // Register month label position when month changes
+        if (d === 0 && monthIndex !== lastMonth && monthIndex < 12) {
           lastMonth = monthIndex;
           monthLabels.push({
             name: monthsNames[monthIndex],
@@ -62,29 +78,34 @@ export default function Dashboard() {
           });
         }
 
-        // Match exact 27 contributions from real GitHub profile in March, April, May, June, July
         let count = 0;
         let level = 0;
 
-        // Jan
-        if (w === 21 && d === 1) { count = 1; level = 1; }
-        // Mar (late Mar)
-        else if (w === 30 && d === 4) { count = 1; level = 1; }
-        // Apr (mid Apr)
-        else if (w === 33 && d === 3) { count = 1; level = 1; }
-        // May (mid & late May)
-        else if (w === 38 && d === 2) { count = 1; level = 1; }
-        else if (w === 40 && d === 4) { count = 2; level = 2; }
-        // June (Peak active period in June matching real GitHub chart!)
-        else if (w === 43 && d === 1) { count = 3; level = 2; }
-        else if (w === 43 && d === 3) { count = 5; level = 4; }
-        else if (w === 44 && d === 2) { count = 6; level = 4; }
-        else if (w === 44 && d === 4) { count = 2; level = 2; }
-        else if (w === 45 && d === 3) { count = 3; level = 3; }
-        // July (July activity matching screenshot)
-        else if (w === 47 && d === 5) { count = 1; level = 1; }
-        else if (w === 49 && d === 1) { count = 1; level = 1; }
-        else if (w === 50 && d === 4) { count = 1; level = 1; }
+        // Exact match of user's 2026 commits from screenshot:
+        // Jan 5
+        if (w === 0 && d === 1) { count = 1; level = 1; }
+        // Late Mar
+        else if (w === 12 && d === 4) { count = 1; level = 1; }
+        // Mid Apr
+        else if (w === 15 && d === 3) { count = 1; level = 1; }
+        // Mid & Late May
+        else if (w === 20 && d === 2) { count = 1; level = 1; }
+        else if (w === 21 && d === 4) { count = 1; level = 1; }
+        // June (Peak active period in June)
+        else if (w === 23 && d === 1) { count = 3; level = 2; }
+        else if (w === 24 && d === 2) { count = 5; level = 4; }
+        else if (w === 24 && d === 3) { count = 6; level = 4; }
+        else if (w === 25 && d === 4) { count = 2; level = 2; }
+        else if (w === 26 && d === 2) { count = 2; level = 2; }
+        // July
+        else if (w === 27 && d === 0) { count = 1; level = 1; }
+        else if (w === 28 && d === 3) { count = 1; level = 1; }
+        else if (w === 30 && d === 4) { count = 2; level = 2; }
+        // AUGUST 5, 2026 (Wednesday) - Right under 'Aug'!
+        else if (w === 31 && d === 3) { 
+          count = recentCommitsCount; 
+          level = 3; 
+        }
 
         const year = currentDate.getFullYear();
         const monthName = monthsNames[monthIndex];
@@ -102,9 +123,9 @@ export default function Dashboard() {
     return { weeks, monthLabels };
   };
 
-  const { weeks, monthLabels } = generateMonthAlignedGrid();
+  const { weeks, monthLabels } = generate2026CalendarGrid();
 
-  // Helper for tile yellow color scheme (matching screenshot)
+  // Helper for yellow tile color scheme
   const getTileColor = (level) => {
     switch (level) {
       case 1: return 'bg-[#4d4814] border border-[#6b641c]'; // Muted dark yellow
@@ -145,20 +166,22 @@ export default function Dashboard() {
       url: 'https://github.com/hamzz02/sewa_alat_band'
     },
     {
-      name: 'KRATAK-FC',
+      name: 'KRATAK FC',
       desc: 'Web application & management system',
       lang: 'PHP / Blade',
       langColor: 'bg-indigo-500',
       url: 'https://github.com/hamzz02'
     },
     {
-      name: 'portofolio-hamka',
+      name: 'portofolio hamka',
       desc: 'Personal portfolio website built with React & Tailwind CSS',
       lang: 'JavaScript',
       langColor: 'bg-yellow-400',
       url: 'https://github.com/hamzz02/portofolio-hamka'
     }
   ];
+
+  const totalContributions = 27 + (recentCommitsCount > 0 ? recentCommitsCount : 1);
 
   return (
     <section id="dashboard" className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 w-full max-w-6xl transition-colors">
@@ -197,7 +220,7 @@ export default function Dashboard() {
           {lang === 'en' ? 'My GitHub activity over the past year.' : 'Aktivitas GitHub saya selama setahun terakhir.'}
         </p>
 
-        {/* 4 Cards with Yellow Stats Numbers (Matching friend's screenshot) */}
+        {/* 4 Cards with Yellow Stats Numbers */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
           
           <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#222] rounded-xl p-4 text-center transition-colors">
@@ -205,7 +228,7 @@ export default function Dashboard() {
               {lang === 'en' ? 'Total' : 'Total'}
             </span>
             <span className="text-2xl sm:text-3xl font-bold text-yellow-400 font-mono">
-              27
+              {totalContributions}
             </span>
           </div>
 
@@ -214,7 +237,7 @@ export default function Dashboard() {
               {lang === 'en' ? 'This Week' : 'Minggu ini'}
             </span>
             <span className="text-2xl sm:text-3xl font-bold text-yellow-400 font-mono">
-              0
+              {recentCommitsCount}
             </span>
           </div>
 
@@ -238,37 +261,47 @@ export default function Dashboard() {
 
         </div>
 
-        {/* Heatmap Grid Ending in July (Aug -> Jul sequence) */}
+        {/* Standard 2026 GitHub Calendar (Jan -> Dec) */}
         <div className="overflow-x-auto pb-3">
-          <div className="min-w-[740px]">
+          <div className="min-w-[760px]">
             
-            {/* Month Headers aligned by grid columns */}
-            <div className="grid grid-cols-[repeat(52,minmax(0,1fr))] gap-1 text-[11px] font-mono text-gray-400 mb-2.5 h-4 relative">
+            {/* Month Headers: Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec */}
+            <div className="pl-7 grid grid-cols-[repeat(53,minmax(0,1fr))] gap-1 text-[11px] font-mono text-gray-400 mb-2 h-4 relative">
               {monthLabels.map((m, idx) => (
                 <div
                   key={idx}
                   style={{ gridColumnStart: m.colIndex + 1 }}
-                  className="col-span-3 text-left font-sans text-xs text-gray-400"
+                  className="col-span-4 text-left font-sans text-xs text-gray-400"
                 >
                   {m.name}
                 </div>
               ))}
             </div>
 
-            {/* 52 Columns x 7 Rows Grid */}
-            <div className="grid grid-cols-[repeat(52,minmax(0,1fr))] gap-1">
-              {weeks.map((week, wIdx) => (
-                <div key={wIdx} className="grid grid-rows-7 gap-1">
-                  {week.map((day, dIdx) => (
-                    <div
-                      key={dIdx}
-                      onMouseEnter={() => setHoveredCell(day)}
-                      onMouseLeave={() => setHoveredCell(null)}
-                      className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-[2.5px] transition-all duration-200 hover:scale-125 hover:z-10 cursor-pointer ${getTileColor(day.level)}`}
-                    />
-                  ))}
-                </div>
-              ))}
+            {/* Grid with Day Labels (Mon, Wed, Fri) on the left */}
+            <div className="flex gap-2 items-start">
+              {/* Day Labels Column */}
+              <div className="flex flex-col justify-between h-[106px] text-[10px] font-mono text-gray-500 pt-1 shrink-0">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+              </div>
+
+              {/* 53 Columns x 7 Rows Grid */}
+              <div className="grid grid-cols-[repeat(53,minmax(0,1fr))] gap-1 grow">
+                {weeks.map((week, wIdx) => (
+                  <div key={wIdx} className="grid grid-rows-7 gap-1">
+                    {week.map((day, dIdx) => (
+                      <div
+                        key={dIdx}
+                        onMouseEnter={() => setHoveredCell(day)}
+                        onMouseLeave={() => setHoveredCell(null)}
+                        className={`w-3 h-3 rounded-[2.5px] transition-all duration-200 hover:scale-125 hover:z-10 cursor-pointer ${getTileColor(day.level)}`}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Legend & Tooltip Footer */}
@@ -279,7 +312,7 @@ export default function Dashboard() {
                     {hoveredCell.count} kontribusi ({hoveredCell.date})
                   </span>
                 ) : (
-                  <span>27 kontribusi pada 2026</span>
+                  <span>{totalContributions} kontribusi pada 2026</span>
                 )}
               </div>
               
